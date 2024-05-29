@@ -31,5 +31,70 @@
 // let d3 = PersonMaker("Brutu" , 2);
 
 
+//new operator
+// Constructors -- it doesn't return anything & Start with capital letter
 
-// new Operator
+// function Person (name , age) {
+//     this.name = name;
+//     this.age = age;
+//     // console.log(this)
+// };
+
+// Person.prototype.talk = function() {
+//     console.log(`This is my name: ${this.name} and my age is ${this.age}`)
+// }
+
+// let p1 = new Person("Dinesh" , 21);
+// let p2 = new Person("Varsha" , 21);
+// let d3 = new Person("Brutu" , 2);
+
+
+// classes 
+
+// class Person {
+//     constructor(name , age)  {
+//         this.name = name;
+//         this.age = age;
+//         // console.log(this) 
+//     }
+//     talk() {
+//         console.log(`This is my name: ${this.name} and my age is ${this.age}`)
+//     }
+// }
+
+
+// let p1 = new Person("Dinesh" , 21);
+// let p2 = new Person("Varsha" , 21);
+// let d3 = new Person("Brutu" , 2);
+
+
+
+// inheritance
+
+class Person {
+    constructor(name , age) {
+        this.name = name;
+        this.age = age;
+    }
+    talk() {
+        console.log(`Hi , i am ${this.name} and age is ${this.age}`)
+    }
+}
+
+
+class Student extends Person {
+    constructor(name , age , marks) {
+        super(name,age);
+        this.marks = marks;
+    }
+}
+
+
+
+
+class Teacher extends Person{
+    constructor(name , age , subject) {
+        super(name,age);
+        this.subject = subject;
+    }
+}
