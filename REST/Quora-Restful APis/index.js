@@ -12,7 +12,7 @@ app.set(express.static(path.join(__dirname,"public/css")));
 app.set(express.static(path.join(__dirname,"public/js")));
 
 app.get("/" , (req , res) => {
-    res.send("Server working well")//
+    res.send("Server working well")
 })
 
 app.listen(port , () => {
