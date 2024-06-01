@@ -2,4 +2,4 @@
 
 # port : 8080
 
-# To run npm istall in terminal dir
+# To run npm install in terminal dir
