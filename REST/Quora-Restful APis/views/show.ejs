@@ -7,11 +7,15 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <h2>Here is you post in detail</h2>
-    <h5>Post id : <%= post.id %></h5>
-    <div class="post">
-        <h3 class="user">@ <%=post.username%></h3>
-        <h4>content : <br><br> <%=post.content%></h4>
-    </div>
+    <h2>Here is your post in detail</h2>
+    <% if (post) { %>
+        <h5>Post id: <%= post.id %></h5>
+        <div class="post">
+            <h3 class="user">@ <%= post.username %></h3>
+            <h4>Content: <br><br> <%= post.content %></h4>
+        </div>
+    <% } else { %>
+        <p>Post not found.</p>
+    <% } %>
 </body>
 </html>

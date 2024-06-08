@@ -1,3 +1,3 @@
 # Quora Post using RESTFULL API's
 
-# ADD,EDIT,Update,Delete
+# CURD OPERATIONS- ADD,EDIT,Update,Delete
