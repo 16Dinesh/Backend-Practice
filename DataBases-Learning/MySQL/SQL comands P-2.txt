@@ -83,4 +83,4 @@ modify SUBS INT default 1000;
 
 truncate table user;
 
-SELECT * FROM user;
+SELECT * FROM user; 
