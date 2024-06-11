@@ -1,0 +1,28 @@
+USE college;
+
+select * FROM user;
+
+INSERT INTO user VALUES                     
+(5,26,"tom","Tom@Gmail.in",900,255),
+(6,13,"Zeke","Zeke@Yahoo.in",255,69),
+(7,21,"Tail","Tail@email.in",266,255),
+(8,33,"Aex","Aex@Gmail.in",500,99),
+(9,19,"Alex","Alex@Gmail.in",1244,255),
+(10,18,"ALI","ALLI@Gmail.in",4321,255);
+
+SELECT name,followers FROM user WHERE followers >=1000;
+
+SELECT name,followers FROM user
+WHERE age>20 AND followers>500;
+
+SELECT name,followers FROM user
+WHERE age>30 OR followers>1000;
+
+SELECT name,followers FROM user
+WHERE age between 20 AND 25;
+
+SELECT name,followers,age FROM user
+WHERE age IN (18,30);
+
+SELECT name,followers,age FROM user
+WHERE age NOT IN (10,25);
