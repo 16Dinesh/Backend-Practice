@@ -32,44 +32,46 @@ let getRandomUser = () => {
 
 // Home route
 app.get("/", (req, res) => {
-    let q = "SELECT count(*) FROM user";
-    connection.query(q, (err, result) => {
-        if (err) {
-            console.error(err);
-            return res.send("Some error in DATABASE");
-        }
+    let q = `SELECT count(*) FROM user`;
+    try {
+      connection.query(q, (err, result) => {
+        if (err) throw err;
         let count = result[0]["count(*)"];
-        res.render("home", { count });
-    });
+        res.render("home.ejs", { count });
+      });
+    } catch (err) {
+      res.send("some error occurred");
+    }
 });
 
 // Show route
 app.get("/user", (req, res) => {
     let q = `SELECT * FROM user`;
-    connection.query(q, (err, users) => {
-        if (err) {
-            console.error(err);
-            return res.send("Some error in DATABASE");
-        }
-        res.render("show", { users });
-    });
+    try {
+      connection.query(q, (err, result) => {
+        if (err) throw err;
+        let data = result;
+        res.render("show.ejs", { data });
+      });
+    } catch (err) {
+      res.send("some error occurred");
+    }
 });
 
 // Edit route
 app.get("/user/:id/edit", (req, res) => {
     let { id } = req.params;
-    let q = `SELECT * FROM user WHERE id = ?`;
-    connection.query(q, [id], (err, result) => {
-        if (err) {
-            console.error(err);
-            return res.send("Some error in DATABASE");
-        }
-        if (result.length === 0) {
-            return res.send("User not found");
-        }
+    let q = `SELECT * FROM user WHERE id='${id}'`;
+  
+    try {
+      connection.query(q, (err, result) => {
+        if (err) throw err;
         let user = result[0];
-        res.render("edit", { user });
-    });
+        res.render("edit.ejs", { user });
+      });
+    } catch (err) {
+      res.send("some error with DB");
+    }
 });
 
 // Update route
@@ -97,6 +99,73 @@ app.patch("/user/:id", (req, res) => {
             res.send("some error in DATABASE");
         }
 })
+
+app.get("/user/new", (req, res) => {
+    res.render("new.ejs");
+});
+
+
+app.post("/user/new", (req, res) => {
+let { username, email, password } = req.body;
+let id = uuidv4();
+//Query to Insert New User
+let q = `INSERT INTO user (id, username, email, password) VALUES ('${id}','${username}','${email}','${password}') `;
+
+try {
+    connection.query(q, (err, result) => {
+    if (err) throw err;
+    console.log("added new user");
+    res.redirect("/user");
+    });
+} catch (err) {
+    res.send("some error occurred");
+}
+});
+
+app.get("/user/:id/delete", (req, res) => {
+let { id } = req.params;
+let q = `SELECT * FROM user WHERE id='${id}'`;
+
+try {
+    connection.query(q, (err, result) => {
+    if (err) throw err;
+    let user = result[0];
+    res.render("delete.ejs", { user });
+    });
+} catch (err) {
+    res.send("some error with DB");
+}
+});
+
+app.delete("/user/:id/", (req, res) => {
+let { id } = req.params;
+let { password } = req.body;
+let q = `SELECT * FROM user WHERE id='${id}'`;
+
+try {
+    connection.query(q, (err, result) => {
+    if (err) throw err;
+    let user = result[0];
+
+    if (user.password != password) {
+        res.send("WRONG Password entered!");
+    } else {
+        let q2 = `DELETE FROM user WHERE id='${id}'`; //Query to Delete
+        connection.query(q2, (err, result) => {
+        if (err) throw err;
+        else {
+            console.log(result);
+            console.log("deleted!");
+            res.redirect("/user");
+        }
+        });
+    }
+    });
+} catch (err) {
+    res.send("some error with DataBase");
+}
+});
+  
 
 
 app.listen(port, () => {
