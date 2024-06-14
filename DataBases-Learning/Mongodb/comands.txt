@@ -1,0 +1,15 @@
+// --> mongosh  // to start in terminal
+
+// use randdabase  // use or create or swtich the database
+
+//  show dbs  // show all databases
+
+// db  // show current database
+
+// db.collection.insertOne({k:V})  //  to insert one data into database
+
+// db.collection.insertMany([{K:V}])  // to insert Many data into database
+
+// db.collection.find() // to read all the data in the database
+
+// db.collection.findOne({K:V})  // to find specific queries.
