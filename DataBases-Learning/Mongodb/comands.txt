@@ -13,3 +13,5 @@
 // db.collection.find() // to read all the data in the database
 
 // db.collection.findOne({K:V})  // to find specific queries.
+
+// 
