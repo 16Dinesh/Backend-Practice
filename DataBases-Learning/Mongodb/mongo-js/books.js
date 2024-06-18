@@ -36,8 +36,7 @@ const bookSchema = new mongoose.Schema({
 });
 
 const Book = mongoose.model("Book", bookSchema);
-
-Book.findByIdAndUpdate("667065522b65d7aef9f88e17" , {price: -250}, {runValidators: true}).then((res)=>{console.log(res)}).catch((err)=>{console.log(err)})
+Book.findByIdAndUpdate("667065522b65d7aef9f88e17" , {price: 250}, {runValidators: true}).then((res)=>{console.log(res)}).catch((err)=>{console.log(err.errors.price.properties.message)})
 
 // let book1 = new Book({
 //     title : "Mathematices XII",
