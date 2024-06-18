@@ -92,3 +92,7 @@ const User = mongoose.model("User" , userSchema);
 // User.deleteOne({name:"DPR"}).then((res)=> {console.log(res)}).catch((err)=>{console.log(err)});
 
 // User.deleteMany({age: {$gt : 45}}).then((res)=> {console.log(res)}).catch((err));
+
+// User.findByIdAndDelete("667020d455142863a6aa6f7e").then((res)=> {console.log(res)});
+
+// User.findOneAndDelete({_id : '66702e25c2aba38bfbfe3b07'}).then((res)=>{console.log(res)});
