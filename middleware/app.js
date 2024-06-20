@@ -25,7 +25,7 @@ const checkToken = (req,res,next)=>{
     if(token === "giveaccess"){
         next()
     }
-    res.send("Access Denied!");  
+    throw new Error("Access Denied!");  
 };
 
 app.get("api", checkToken, (req,res)=> {
