@@ -41,8 +41,7 @@ app.get("/chats/new", (req,res)=>{
 })
 
 //Create Route 
-app.post("/chats" , async (req,res,next)=>{
-    try {
+app.post("/chats" , asyncWarp ( async (req,res,next)=>{
         let {from , to , msg } = req.body;
         let newChat = new Chat ({
             from: from,
@@ -52,24 +51,23 @@ app.post("/chats" , async (req,res,next)=>{
         });
         await newChat.save();
         res.redirect("/chats");
-    } catch (err) {
-        next(err)
-    }
-});
+}));
+
+function asyncWarp(fn) {
+    return function (req,res,next) {
+        fn(req,res,next).catch((err) => next(err))
+    };
+}
 
 //New - Show Route 
-app.get('/chats/:id' , async (req,res,next)=>{
-    try {
+app.get('/chats/:id' ,asyncWarp( async (req,res,next)=>{
         let {id} = req.params;
         let chat = await Chat.findById(id);
         if(!chat) {
             next(new ExpressError(404, "Chat not found"))
         }
         res.render("edit" , {chat});
-    } catch (err) {
-        next(err);
-    }
-});
+}));
 
 //Edit Route
 app.get('/chats/:id/edit' , async (req,res)=>{
@@ -109,6 +107,20 @@ app.delete("/chats/:id" , async (req,res)=>{
 
 app.get("/" , (req,res)=>{
     res.send("working")
+})
+
+const handleValidationErr = (err) => {
+    console.log(`This was a Validation Error. Please follow rules`);
+    console.dir(err.message);
+    return err;
+}
+
+app.use((err,req,res,next) => {
+    console.log(err.name);
+    if(err.name === "ValidationError"){
+        handleValidationErr(err);
+    }
+    next(err);
 })
 
 //Error Handling Middleware
