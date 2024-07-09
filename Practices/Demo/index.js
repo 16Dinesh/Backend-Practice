@@ -5,7 +5,7 @@ const path = require("path")
 
 app.set("view engine" , "ejs");
 app.use(express.static(path.join(__dirname,"public/css")));
-app.use(express.static(path.join(__dirname,"public/Ass")));
+app.use(express.static(path.join(__dirname,"public/files")));
 
 app.get("/" , (req , res) => {
     res.render("home");
@@ -13,6 +13,7 @@ app.get("/" , (req , res) => {
 app.set("views" , path.join(__dirname,"/views"));
 
 
-app.listen(port , () => {
-    console.log("listening to the ",port);
-})
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
