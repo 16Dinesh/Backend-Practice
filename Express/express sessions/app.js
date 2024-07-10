@@ -1,23 +1,43 @@
 const express = require('express');
 const app = express();
+const users = require("./routes/user");
+const posts = require("./routes/posts");
 const session = require('express-session')
+const flash = require("connect-flash");
+const path = require("path");
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
 const sessionOptions = {secret : "my-super-secrets-string", resave: false,saveUninitialized: true };
 
 app.use(
     session(sessionOptions)
 );
+app.use(flash());
+
+app.use((req, res, next) => {
+    res.locals.errmsg = req.flash("Error")
+    res.locals.messages = req.flash("success")
+    next()
+})
 
 app.get("/register", (req,res) => {
     let { name ="Dinesh" } = req.query;
     req.session.name = name;
     //console.log(req.session.name) 
-    res.send(name);
-    res.redirect(303,"/hello");
+    if (name === "Dinesh") {
+        req.flash('Error', 'user not registered ');
+    }else {
+        req.flash('success', 'user registered successs');
+    }
+    res.redirect("/hello");
 })
 
 app.get("/hello" , (req,res) => {
-    res.send(`hello this is -> ${req.session.name} `)
+    // res.locals.errmsg = req.flash("Error")
+    // res.locals.messages = req.flash("success")
+    res.render("page.ejs" , {name: req.session.name});
 })
 
 // app.get("/test", (req,res) => {
