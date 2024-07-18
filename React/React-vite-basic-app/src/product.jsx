@@ -1,10 +1,14 @@
 import "./Product.css"
 
-function Product() {
+function Product({title, descriptions,features, features1,listo,price}) {
     return (
     <div className="Product">
-    <h3>Title of the product</h3>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab sunt reiciendis quisquam eum minus. Delectus, tempore recusandae expedita aspernatur dolor dolorem commodi soluta iure illum aut, animi odio in consequuntur.</p>
+    <h3>{title}</h3>
+    <p>{descriptions}</p>
+    <p>Features = {features}</p>
+    <p>{listo.map((lists)=> (<li>{lists}</li>))}</p>
+    <h3>₹ {price}</h3>
+    {price > 40000 ? <h4>"25% Discount" </h4>: null} 
     </div>
     )
 }
