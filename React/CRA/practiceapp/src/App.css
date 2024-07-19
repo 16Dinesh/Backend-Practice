@@ -1,0 +1,39 @@
+.App {
+  border: 2px solid black;
+  text-align: center;
+}
+
+.FormSection {  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+
+.inputDiv input {
+  height: 2rem;
+  width: 15rem;
+}
+
+.SubmitBtn {
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-top: 5px;
+  
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  
+}
+
+.section input {
+  height: 2rem;
+  width: 15rem;
+  margin: 0.5rem;
+}
