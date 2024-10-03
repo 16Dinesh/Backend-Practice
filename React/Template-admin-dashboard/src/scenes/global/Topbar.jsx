@@ -10,7 +10,7 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 
 
-function Topbar ()  {
+function TopBar ()  {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const colorMode = useContext(ColorModeContext);
@@ -52,4 +52,4 @@ function Topbar ()  {
     )
 }
 
-export default Topbar;
+export default TopBar;
