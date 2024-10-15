@@ -3,6 +3,8 @@ import { useSelector } from "react-redux"
 const NavBar = () => {
 
     const updateLikes = useSelector((state) => state.counter.value)
+    const updatedSub = useSelector((state) => state.subnew.users)
+    const updatedComments = useSelector((state) => state.newComment.comment)
     
   return (
     <div className='navSection'>
@@ -10,10 +12,10 @@ const NavBar = () => {
             Redux
         </div>
         <div className="navUser">
-            Subscribers:
+            Subscribers: {updatedSub.length}
         </div>
         <div className="navComments">
-            Comments:
+            Comments: {updatedComments.length}
         </div>
         <div className="navLikes">
             Likes: {updateLikes}

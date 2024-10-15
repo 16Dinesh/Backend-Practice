@@ -1,20 +1,24 @@
 import { useState } from 'react';
-
+import { useDispatch } from 'react-redux';
+import { addUser } from '../redux/commentSlice';
 
 
 const UserForm = () => {
     const [userName, setUserName]= useState('')
+
+    const dispatch = useDispatch();
    
 
     const userNameHandler =(e)=>{
         setUserName(e.target.value)
     }
 
-const submitHandler =(e)=>{
-    e.preventDefault()
-    setUserName("")
-    
-}
+    const submitHandler =(e)=>{
+        e.preventDefault()
+        dispatch(addUser(userName))
+        setUserName("")
+        
+    }
 
   return (
     <div >
