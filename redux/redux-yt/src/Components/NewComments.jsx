@@ -6,7 +6,7 @@ const NewComments = () => {
 
     <div >
       item
-  </div>
+    </div>  
   )
 }
 

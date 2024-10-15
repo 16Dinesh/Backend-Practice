@@ -1,8 +1,9 @@
-
+import { useSelector } from "react-redux"
 
 const NavBar = () => {
 
-
+    const updateLikes = useSelector((state) => state.counter.value)
+    
   return (
     <div className='navSection'>
         <div className="navTitle">
@@ -15,7 +16,7 @@ const NavBar = () => {
             Comments:
         </div>
         <div className="navLikes">
-            Likes: 
+            Likes: {updateLikes}
         </div>
     </div>
   )
